@@ -1,0 +1,103 @@
+------------------------------------------------------------------------------------
+When input is "acacacacacacac":
+
+rodrigo@rodrigo:~/Dropbox/Fall 2017/ece3520/sde1/sd1$ ./whichclass <acacacacacacac 
+
+>>>> 3520 Grammatical Recognizer (SDE1) <<<<<<
+
+class is w1
+
+------------------------------------------------------------------------------------
+
+When input is "acacacacacacacccc":
+
+rodrigo@rodrigo:~/Dropbox/Fall 2017/ece3520/sde1/sd1$ ./whichclass <acacacacacacacccc 
+
+>>>> 3520 Grammatical Recognizer (SDE1) <<<<<<
+
+class is 'None of the above'
+
+------------------------------------------------------------------------------------
+
+When input is "acacfg":
+
+rodrigo@rodrigo:~/Dropbox/Fall 2017/ece3520/sde1/sd1$ ./whichclass <acacfg
+
+>>>> 3520 Grammatical Recognizer (SDE1) <<<<<<
+
+class is 'None of the above'
+
+------------------------------------------------------------------------------------
+
+When input is "ccccaa":
+
+rodrigo@rodrigo:~/Dropbox/Fall 2017/ece3520/sde1/sd1$ ./whichclass <ccccaa
+
+>>>> 3520 Grammatical Recognizer (SDE1) <<<<<<
+
+class is w3
+
+-------------------------------------------------------------------------------------
+
+When input is "cccaaq":
+
+rodrigo@rodrigo:~/Dropbox/Fall 2017/ece3520/sde1/sd1$ ./whichclass <ccccaaq
+
+>>>> 3520 Grammatical Recognizer (SDE1) <<<<<<
+
+class is 'None of the above'
+
+-------------------------------------------------------------------------------------
+
+When input is "aaaaaacc":
+
+rodrigo@rodrigo:~/Dropbox/Fall 2017/ece3520/sde1/sd1$ ./whichclass <aaaaaacc
+
+>>>> 3520 Grammatical Recognizer (SDE1) <<<<<<
+
+class is w2
+
+-------------------------------------------------------------------------------------
+
+When input is "aaaaaaccaac":
+
+rodrigo@rodrigo:~/Dropbox/Fall 2017/ece3520/sde1/sd1$ ./whichclass <aaaaaaccaac
+
+>>>> 3520 Grammatical Recognizer (SDE1) <<<<<<
+
+class is 'None of the above'
+
+-------------------------------------------------------------------------------------
+
+When input is "udechileacac":
+
+rodrigo@rodrigo:~/Dropbox/Fall 2017/ece3520/sde1/sd1$ ./whichclass <udechileacac
+
+>>>> 3520 Grammatical Recognizer (SDE1) <<<<<<
+
+class is 'None of the above'
+
+------------------------------------------------------------------------------------
+
+When input is "acacACAC":
+
+rodrigo@rodrigo:~/Dropbox/Fall 2017/ece3520/sde1/sd1$ ./whichclass <acacACAC
+
+>>>> 3520 Grammatical Recognizer (SDE1) <<<<<<
+
+class is 'None of the above'
+
+------------------------------------------------------------------------------------
+
+when input is "ccccaa125ccccaa"
+
+rodrigo@rodrigo:~/Dropbox/Fall 2017/ece3520/sde1/sd1$ ./whichclass <ccccaa125ccccaa
+
+>>>> 3520 Grammatical Recognizer (SDE1) <<<<<<
+
+class is 'None of the above'
+
+
+
+
+

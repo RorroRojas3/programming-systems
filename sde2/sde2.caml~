@@ -1,0 +1,232 @@
+(** Author: Rodrigo Rojas
+	 Contact: rrojas@clemson.edu
+	 Project: SD2
+*)
+
+(**
+	Prototype: add_to_cell(symbol,cell)
+	Input(s): string symbol and possibly nonempty cell (string list)
+	Returned Value: symbol added to cell, if not already there
+	Side Effects: none
+	Signature: ’a * ’a list -> ’a list = <fun>
+	Notes: Used to add string to cell (list), w/o repeats
+	May design and implement as polymorphic
+*)
+
+
+(* Function 3.1 *)
+let add_to_cell (symbol, cell) = 
+	if (List.mem symbol cell)
+		then cell
+	else 
+		symbol :: cell ;;
+
+(*--------------------------------------------------------------------------- *)
+
+(**
+	Prototype: form_row1_cell(element,productions)
+	Input(s): string to parse, production list
+	Returned Value: cell (string list) containing LHS of production
+	capable of producing element
+	7
+	Side Effects: none
+	Signature: ’a * ’a list list -> ’a list = <fun>
+*)
+
+(* Function 3.2 *)
+let rec form_row1_cell(element, productions) = 
+	match productions with
+		| [] -> []
+		| head::tails -> 
+			if (List.mem element head)
+				then add_to_cell(List.hd head, form_row1_cell(element, tails))
+			else form_row1_cell(element, tails);;
+			
+(*--------------------------------------------------------------------------- *)
+	
+(**
+	Prototype: form_row1(string,productions)
+	Input(s): input string to be parsed, as a string list
+	productions in CNF
+	Returned Value: first row of CYK table
+	Side Effects: none
+	Signature: ’a list * ’a list list -> ’a list list = <fun>
+	Notes: Forms row 1 of CYK table as a special case.
+*)
+	
+(* Function 3.3 *)
+let rec form_row1(bookstring, bookprods) =
+	match bookstring with
+		| [] -> []
+		| head::tails ->
+			form_row1_cell(head, bookprods) :: form_row1(tails, bookprods);;
+			
+(*--------------------------------------------------------------------------- *)
+
+(**
+	Prototype: decompositions (n)
+	Inputs: integer (string length)
+	Returned Value: list of decomposition lists, each of form [j;k]
+	Side Effects: none
+	Signature: int -> int list list = <fun>
+	Notes: Notation [j;k] in this function means a list of length j
+	followed by a list of length k
+	i.e., the ’j+k’ decomposition.
+	This is not cell j,k in the CYK table.
+*)
+			
+(* Auxilary Function for 3.4 *)
+let rec incrementNumber(c1, c2, n) = 
+	if (c2 == n)
+		then []
+	else if ((c1 + c2) == n)
+		then c1 :: c2 :: incrementNumber(c1, (c2 + 1), n)
+	else
+		incrementNumber(c1, (c2 + 1), n);;
+
+(* Auxilary Function for 3.4 *)
+let rec baseNumber(c1, n) = 
+	if (c1 == n)
+		then []
+	else
+		incrementNumber(c1, 1, n) :: baseNumber((c1 + 1), n);;
+
+(* Function 3.4 *)
+let decompositions(n) = 
+	baseNumber(1, n);;
+
+(*--------------------------------------------------------------------------- *)
+
+(**
+	Prototype: find_targets_in_all_decompositions(i,j)
+	Inputs: cell indices for cell t_ij in the CYK table
+	Returned Value: list of list of all cell pair indices to be tested
+	Side Effects: none
+	Signature: int * int -> int list list list = <fun>
+	Notes: Used to find cell pairs in binary decomposition of the string.
+*)
+
+(* Auxiliary Function for 3.5 *)	
+let rightPair(i, j, c2) =
+	List.nth (decompositions(i + j)) ((c2)) ;; 
+			
+(* Auxiliary Function for 3.5 *)
+let leftPair(i, j, c1) = 
+	i :: c1 :: [];;
+	
+(* Auxilary Function for 3.5 *)
+let getPair(i, j, c1, c2) =
+	leftPair(i, j , c1) :: rightPair(i, j, c2) :: [] ;;
+
+(* Auxiliary Function for 3.5 *)
+let rec startDecomposition(i, j, c1, c2) =
+	if (c1 == j)
+		then []
+	else
+		getPair(i, j, c1, c2) :: startDecomposition(i, j, c1 + 1, c2 + 1);;
+
+(* Function 3.5 *)
+let find_targets_in_all_decompositions(i, j) = 
+		startDecomposition(i, j, 1, i);;
+		
+(*--------------------------------------------------------------------------- *)
+
+(**
+	Prototype: cell_products([cell1;cell2])
+	Inputs: list of 2 cell lists (cell pairs)
+	Returned Value: ’product’ of the 2 cells for CYK table
+	Side Effects: none
+	Signature: string list list -> string list = <fun>
+	Notes: See examples
+*)
+
+(*Auxilary Function for 3.6 *)
+let rec getRightLetter(input, c1, c2) = 
+	if (c2 >= List.length (List.nth input 1))
+		then []
+	else
+		((List.nth (List.nth input 0) c1) ^ (List.nth (List.nth input 1) c2)) :: getRightLetter(input, c1, c2 + 1);; 
+
+(* Auxilary Function for 3.6 *)
+let rec getLeftLetter(input, c1) =
+	if (c1 >= List.length (List.nth input 0))
+		then []
+	else
+		getRightLetter(input, c1, 0) :: getLeftLetter(input, c1 + 1);;
+
+(* Function 3.6 *)
+let cell_products(input) =
+		List.concat (getLeftLetter(input, 0));;
+	
+(*----------------------------------------------------------------------------*)
+
+(**
+	Prototype: form_cyk_table(prods,ctable)
+	Inputs: productions, current table
+	Returned Value: the CYK parse table
+	Side Effects: none
+	Signature: string list list * string list list list -> string list list list = <fun>
+	Notes: This function is started with ctable = [row1].
+*)
+
+(* Gets single letter based on the elementOfDecom integere values passed *)
+let getLetter(elementOfDecom, ctable) = 
+	List.nth (List.nth ctable ((List.nth elementOfDecom 1) -1)) ((List.nth elementOfDecom 0) -1);;
+
+(* Get a single Pair of the decomposition wanted *)
+let getSinglePair(decomPair, whichElement) = 
+	List.nth decomPair whichElement;;
+
+(* Gets the pair of decompositions wanted *)
+let getBothPairs(decomp, currentPairNumber) =
+	List.nth decomp currentPairNumber;;
+
+(* Gets the pair letters needed for one pair *)
+let rec getConcat(decomp, currentPairNumber, ctable, c1) =
+	if (c1 == List.length (List.nth decomp currentPairNumber))
+		then []
+	else
+		getLetter(getSinglePair(getBothPairs(decomp, currentPairNumber), c1), ctable) :: getConcat(decomp, currentPairNumber, ctable, c1 + 1);;
+		
+(* Gets the pairs for each  *)
+let rec addToConcat(decomp, currentPairNumber, ctable) =
+	if (currentPairNumber == List.length decomp)
+		then []
+	else
+		cell_products(getConcat(decomp, currentPairNumber, ctable, 0)) @ addToConcat(decomp, currentPairNumber + 1, ctable);;
+		
+(* Creates a new row for CYK table *)
+let rec newRow(stringList, productions) = 
+	match stringList with
+		| [] -> []	
+		| head::tails ->
+			List.concat (form_row1_cell(head, productions)  :: form_row1(tails, productions));;
+			
+(* Eliminates repeated strings *) 
+let rec cleanStrings(stringList, c1, length) = 
+	if (c1 == length)
+		then []
+	else
+		if ((List.mem (List.hd stringList) (List.tl stringList)) == true)
+			then cleanStrings((List.tl stringList), c1 + 1, length) 
+		else
+			(List.hd stringList) :: cleanStrings((List.tl stringList), c1 + 1, length);;  
+ 
+ 
+(* Increment i *)			
+let rec incrementI(prods, ctable, i, j) =
+	if (i == List.length (List.nth ctable (j-2)))
+		then []
+	else cleanStrings(newRow(addToConcat(find_targets_in_all_decompositions(i,j),0,ctable), prods), 0, List.length (newRow(addToConcat(find_targets_in_all_decompositions(i,j),0,ctable), prods))) :: incrementI(prods, ctable, i + 1, j) ;;
+	
+(* Increment j *)
+let rec incrementJ(prods, ctable, i, j) =
+	if (j == (List.length (List.nth ctable 0)+ 1))
+		then []
+	else incrementI(prods, ctable, i, j) :: incrementJ(prods, ctable @ [incrementI(prods, ctable, i, j)], 1, j + 1);;
+
+let form_cyk_table(prods, ctable) = 
+	[List.nth ctable 0] @ incrementJ(prods, ctable, 1, 2);;
+
+		
+

@@ -1,0 +1,14 @@
+s1 --> [a],[c],nontd.
+nontd --> s1.
+nontd --> [a],[c].
+s2 --> [a],nonta,nontc.
+nonta --> [a],nonta.
+nonta --> [a].
+nontc --> [c],nontc.
+nontc --> [c].
+s3 --> nontg,nonth.
+nontg --> [c],nontg.
+nontg --> [c].
+nonth --> [a],nonth.
+nonth --> [a].
+none --> not(s1).

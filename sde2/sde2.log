@@ -1,0 +1,131 @@
+Author: Rodrigo Rojas
+Contact: rrojas@clemson.edu	
+Purpose: Test Cases for each function
+
+-----------------------------------------------------------------------------
+
+Function 3.1 -> "add_to_cell()"
+
+When input is ("W", []);;
+
+# add_to_cell("W",[]);;
+- : string list = ["W"]
+
+When input is ("W", ["W;"Z"]);;
+
+add_to_cell("W",["W";"Z"]);;
+- : string list = ["W"; "Z"]
+
+-------------------------------------------------------------------------------
+
+Function 3.2 -> "form_row1_cell()"
+
+When input is ("w", [["D";"w"]]);;
+
+form_row1_cell("w", [["D";"w"]]);;
+- : string list = ["D"]
+
+When input is ("w", [["D";"w"];["A";"a"];["C";"w"]]);;
+
+form_row1_cell("w", [["D";"w"];["A";"a"];["C";"w"]]);;
+- : string list = ["D"; "C"]
+
+-------------------------------------------------------------------------------
+
+Function 3.3 -> "form_row1()"
+
+When input is (["w";"x"], [["S"; "AB"]; ["S"; "BB"]; ["A"; "CC"]; ["A"; "AB"]; ["A"; "a"]; ["B"; "BB"];["B"; "CA"]; ["B"; "w"]; ["C"; "BA"]; ["C"; "AA"]; ["C"; "x"]])
+
+form_row1(["w";"x"], [["S"; "AB"]; ["S"; "BB"]; ["A"; "CC"]; ["A"; "AB"]; ["A"; "a"]; ["B"; "BB"];["B"; "CA"]; ["B"; "w"]; ["C"; "BA"]; ["C"; "AA"]; ["C"; "x"]]);;                                                     
+- : string list list = [["B"]; ["C"]]
+
+When input is (["w";"x"], [["S"; "AB"]; ["S"; "BB"]; ["A"; "CC"]; ["A"; "AB"]; ["A"; "a"]; ["B"; "BB"];["B"; "CA"]; ["B"; "b"]; ["C"; "BA"]; ["C"; "AA"]; ["C"; "c"]])
+
+# form_row1(["w";"x"], [["S"; "AB"]; ["S"; "BB"]; ["A"; "CC"]; ["A"; "AB"]; ["A"; "a"]; ["B"; "BB"];["B"; "CA"]; ["B"; "b"]; ["C"; "BA"]; ["C"; "AA"]; ["C"; "c"]]);;
+- : string list list = [[]; []]
+
+------------------------------------------------------------------------------
+
+Function 3.4  -> "decompositions()"
+
+When input is 6 
+
+# decompositions(6);; 
+- : int list list = [[1; 5]; [2; 4]; [3; 3]; [4; 2]; [5; 1]]
+
+When input is 10 
+
+# decompositions(10);;
+- : int list list =
+[[1; 9]; [2; 8]; [3; 7]; [4; 6]; [5; 5]; [6; 4]; [7; 3]; [8; 2]; [9; 1]]
+
+------------------------------------------------------------------------------
+
+Function 3.5 -> "find_targets_in_all_decompositions()"
+
+When input is (1,5)
+
+# find_targets_in_all_decompositions(1, 5);;
+- : int list list list =
+[[[1; 1]; [2; 4]]; [[1; 2]; [3; 3]]; [[1; 3]; [4; 2]]; [[1; 4]; [5; 1]]]
+
+When input is (3, 5);;
+
+# find_targets_in_all_decompositions(3, 5);;
+- : int list list list =
+[[[3; 1]; [4; 4]]; [[3; 2]; [5; 3]]; [[3; 3]; [6; 2]]; [[3; 4]; [7; 1]]]
+
+------------------------------------------------------------------------------
+
+Function 3.6  - > "cell_products()
+
+When input is ([["X";"Y"];["X";"T";"E";"G";"Q"]])
+
+# cell_products([["X";"Y"];["X";"T";"E";"G";"Q"]]);; 
+- : string list =
+["XX"; "XT"; "XE"; "XG"; "XQ"; "YX"; "YT"; "YE"; "YG"; "YQ"]
+
+When input is ([["X"];["AA";"AD";"BB"]])
+
+# cell_products([["X"];["AA";"AD";"BB"]]);;         
+- : string list = ["XAA"; "XAD"; "XBB"]
+
+------------------------------------------------------------------------------
+
+Function 3.7 - > "form_cyk_table()"
+
+
+When input is ([["S"; "AB"]; ["S"; "BB"]; ["A"; "CC"]; ["A"; "AB"]; ["A"; "a"]; ["B"; "BB"];
+["B"; "CA"]; ["B"; "b"]; ["C"; "BA"]; ["C"; "AA"]; ["C"; "b"]], [form_row1(["c";"a";"a";"b"],[["S"; "AB"]; ["S"; "BB"]; ["A"; "CC"]; ["A"; "AB"]; ["A"; "a"]; ["B"; "BB"];
+["B"; "CA"]; ["B"; "b"]; ["C"; "BA"]; ["C"; "AA"]; ["C"; "c"]])])
+
+# form_cyk_table([["S"; "AB"]; ["S"; "BB"]; ["A"; "CC"]; ["A"; "AB"]; ["A"; "a"]; ["B"; "BB"];
+["B"["B"; "CA"]; ["B"; "b"]; ["C"; "BA"]; ["C"; "AA"]; ["C"; "b"]], [form_row1(["c";"a";"a";"b"],[["S"; "AB"]; ["S"; "BB"]; ["A"; "CC"]; ["A"; "AB"]; ["A"; "a"]; ["B"; "BB"];
+
+["B"; "CA"];     ["B"; "b"]; ["C"; "BA"]; ["C"; "AA"]; ["C"; "c"]])]);;
+- : string list list list =
+[[["C"]; ["A"]; ["A"]; ["B"]]; [["B"]; ["C"]; ["S"; "A"]];
+ [["A"; "C"]; ["C"]]; [["C"; "S"; "A"]]]
+
+
+When input is ([["S"; "CD"]; ["S"; "C"]; ["C"; "D"]; ["C"; "x"]; ["D"; "D"]; ["D"; "w"];
+["C"; "x"]], [form_row1(["x";"x";"w";"w"],[["S"; "CD"]; ["S"; "C"]; ["C"; "D"]; ["C"; "x"]; ["D"; "D"]; ["D"; "w"];
+["C"; "x"]]) ])
+
+# form_cyk_table([["S"; "CD"]; ["S"; "C"]; ["C"; "D"]; ["C"; "x"]; ["D"; "D"]; ["D"; "w"];
+
+["C"["C"; "x"]], [form_row1(["x";"x";"w";"w"],[["S"; "CD"]; ["S"; "C"]; ["C"; "D"]; ["C"; "x"]; ["D"; "D"]; ["D"; "w"];
+
+["C"["C"; "x"]]) ]);;
+- : string list list list =
+[[["C"]; ["C"]; ["D"]; ["D"]]; [[]; ["S"]; []]; [[]; []]; [[]]]
+
+
+
+
+
+
+
+
+
+

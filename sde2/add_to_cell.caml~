@@ -1,0 +1,11 @@
+(* Function add_to_cell will add the symbol
+	 into the list IF and only IF the symbol
+	 is not already on the list, otherwise
+	 it returns the current list
+	 
+	*)
+let add_to_cell (symbol, cell) = 
+	if (List.mem symbol cell)
+		then cell
+	else 
+		symbol :: cell ;;

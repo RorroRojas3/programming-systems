@@ -1,0 +1,253 @@
+Terminals unused in grammar
+
+   ERROR
+
+
+Grammar
+
+    0 $accept: s $end
+
+    1 s: A C d
+
+    2 d: s
+    3  | A C
+
+    4 s: A a c
+
+    5 a: A a
+    6  | A
+
+    7 c: C c
+    8  | C
+
+    9 s: g h
+
+   10 g: C g
+   11  | C
+
+   12 h: A h
+   13  | A
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+A (258) 1 3 4 5 6 12 13
+C (259) 1 3 7 8 10 11
+ERROR (260)
+
+
+Nonterminals, with rules where they appear
+
+$accept (6)
+    on left: 0
+s (7)
+    on left: 1 4 9, on right: 0 2
+d (8)
+    on left: 2 3, on right: 1
+a (9)
+    on left: 5 6, on right: 4 5
+c (10)
+    on left: 7 8, on right: 4 7
+g (11)
+    on left: 10 11, on right: 9 10
+h (12)
+    on left: 12 13, on right: 9 12
+
+
+state 0
+
+    0 $accept: . s $end
+
+    A  shift, and go to state 1
+    C  shift, and go to state 2
+
+    s  go to state 3
+    g  go to state 4
+
+
+state 1
+
+    1 s: A . C d
+    4  | A . a c
+
+    A  shift, and go to state 5
+    C  shift, and go to state 6
+
+    a  go to state 7
+
+
+state 2
+
+   10 g: C . g
+   11  | C .
+
+    C  shift, and go to state 2
+
+    $default  reduce using rule 11 (g)
+
+    g  go to state 8
+
+
+state 3
+
+    0 $accept: s . $end
+
+    $end  shift, and go to state 9
+
+
+state 4
+
+    9 s: g . h
+
+    A  shift, and go to state 10
+
+    h  go to state 11
+
+
+state 5
+
+    5 a: A . a
+    6  | A .
+
+    A  shift, and go to state 5
+
+    $default  reduce using rule 6 (a)
+
+    a  go to state 12
+
+
+state 6
+
+    1 s: A C . d
+
+    A  shift, and go to state 13
+    C  shift, and go to state 2
+
+    s  go to state 14
+    d  go to state 15
+    g  go to state 4
+
+
+state 7
+
+    4 s: A a . c
+
+    C  shift, and go to state 16
+
+    c  go to state 17
+
+
+state 8
+
+   10 g: C g .
+
+    $default  reduce using rule 10 (g)
+
+
+state 9
+
+    0 $accept: s $end .
+
+    $default  accept
+
+
+state 10
+
+   12 h: A . h
+   13  | A .
+
+    A  shift, and go to state 10
+
+    $default  reduce using rule 13 (h)
+
+    h  go to state 18
+
+
+state 11
+
+    9 s: g h .
+
+    $default  reduce using rule 9 (s)
+
+
+state 12
+
+    5 a: A a .
+
+    $default  reduce using rule 5 (a)
+
+
+state 13
+
+    1 s: A . C d
+    3 d: A . C
+    4 s: A . a c
+
+    A  shift, and go to state 5
+    C  shift, and go to state 19
+
+    a  go to state 7
+
+
+state 14
+
+    2 d: s .
+
+    $default  reduce using rule 2 (d)
+
+
+state 15
+
+    1 s: A C d .
+
+    $default  reduce using rule 1 (s)
+
+
+state 16
+
+    7 c: C . c
+    8  | C .
+
+    C  shift, and go to state 16
+
+    $default  reduce using rule 8 (c)
+
+    c  go to state 20
+
+
+state 17
+
+    4 s: A a c .
+
+    $default  reduce using rule 4 (s)
+
+
+state 18
+
+   12 h: A h .
+
+    $default  reduce using rule 12 (h)
+
+
+state 19
+
+    1 s: A C . d
+    3 d: A C .
+
+    A  shift, and go to state 13
+    C  shift, and go to state 2
+
+    $default  reduce using rule 3 (d)
+
+    s  go to state 14
+    d  go to state 15
+    g  go to state 4
+
+
+state 20
+
+    7 c: C c .
+
+    $default  reduce using rule 7 (c)

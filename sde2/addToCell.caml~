@@ -1,0 +1,3 @@
+let addToCell = function input1::input2
+	if (input2 = []) then input1
+	else -> false'

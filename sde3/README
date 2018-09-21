@@ -1,0 +1,24 @@
+Author: Rodrigo Rojas
+
+Contact: rrojas@clemson.edu
+
+Project: SDE3
+
+Purpose: Implement Parsing with Prolog Programming Language
+
+Contents: sde3.pro, sde3.log, sde3LGN.pro
+
+"sde3.pro"
+	- This is the Prolog file which contains the parsing of the three
+	  languages
+
+"sde3.log"
+	- Contains examples and output of the different test cases for the 
+	  parsing Prolog program created for SDE3. 
+	   
+
+Pledge:
+On my honor I have neither given nor received aid on this
+exam.
+Rodrigo Ignacio Rojas Garcia
+

@@ -1,0 +1,17 @@
+%{
+    #include "whichclass.tab.h"
+%}
+%option nounput 
+%option noinput 
+
+E [^ac \r\n\t] 
+A a 
+C c 
+
+%%
+[ \r\n\t]+	
+{A} return A;	
+{C} return C;
+{E} return ERROR;	
+
+%%
